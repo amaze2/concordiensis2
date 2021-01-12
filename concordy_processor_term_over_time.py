@@ -40,14 +40,14 @@ years = range(start_year,end_year+1)
 lem_ans = st.sidebar.selectbox(label="Lemmatize the data?", options=("Yes","No"), index=0)
 if lem_ans == "Yes":
     #pickleIn = open("concordy_lemma.pickle",'rb')
-    f = requests.get("https://drive.google.com/drive/My Drive/concordy_app/concordy_raw_no_POS.pickle")
+    f = requests.get("https://drive.google.com/file/d/19mIQf7IGY6haVNIebiVzCiHN5AFR5KFI/view?usp=sharing")
     #pickleIn = open(f,'rb')
     #d_year_month_text = pickle.load(pickleIn)
     d_year_month_text = pickle.load(open(f.content, "rb"))
     search_terms = [lemmatizer.lemmatize(term.lower()) for term in search_terms if term.isalpha()]
 else:
     #pickleIn = open("concordy_raw_no_POS.pickle",'rb')
-    f = requests.get("https://drive.google.com/drive/My Drive/concordy_app/concordy_raw_no_POS.pickle")
+    f = requests.get("https://drive.google.com/file/d/19mIQf7IGY6haVNIebiVzCiHN5AFR5KFI/view?usp=sharing")
     #pickleIn = open(f,'rb')
     #d_year_month_text = pickle.load(pickleIn)
     d_year_month_text = pickle.load(open(f.content, "rb"))
