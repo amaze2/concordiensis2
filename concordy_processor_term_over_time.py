@@ -1,4 +1,5 @@
 import nltk, pickle, matplotlib.pyplot as plt, streamlit as st, numpy as np, requests
+from io import BytesIO
 nltk.download('punkt')
 nltk.download('wordnet')
 
@@ -40,12 +41,13 @@ lem_ans = st.sidebar.selectbox(label="Lemmatize the data?", options=("Yes","No")
 if lem_ans == "Yes":
     #pickleIn = open("concordy_lemma.pickle",'rb')
     pickleIn = requests.get("https://drive.google.com/drive/My Drive/concordy_app/concordy_raw_no_POS.pickle")
-    d_year_month_text = pickle.load(pickleIn)
+    #d_year_month_text = pickle.load(pickleIn)
+    d_year_month_text = pickle.load(BytesIO(pickleIn.content))
     search_terms = [lemmatizer.lemmatize(term.lower()) for term in search_terms if term.isalpha()]
 else:
     #pickleIn = open("concordy_raw_no_POS.pickle",'rb')
     pickleIn = requests.get("https://drive.google.com/drive/My Drive/concordy_app/concordy_raw_no_POS.pickle")
-    d_year_month_text = pickle.load(pickleIn)
+    d_year_month_text = pickle.load(BytesIO(pickleIn.content))
     case_ans = st.sidebar.selectbox(label="Lower case the data?", options=("Yes","No"), index=0)
     if case_ans == "Yes":
         search_terms = [term.lower() for term in search_terms if term.isalpha()]
