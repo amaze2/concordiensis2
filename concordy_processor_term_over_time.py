@@ -44,7 +44,7 @@ if lem_ans == "Yes":
     search_terms = [lemmatizer.lemmatize(term.lower()) for term in search_terms if term.isalpha()]
 else:
     #pickleIn = open("concordy_raw_no_POS.pickle",'rb')
-	pickleIn = requests.get("/content/drive/My Drive/concordy_app/concordy_raw_no_POS.pickle")
+    pickleIn = requests.get("/content/drive/My Drive/concordy_app/concordy_raw_no_POS.pickle")
     d_year_month_text = pickle.load(pickleIn)
     case_ans = st.sidebar.selectbox(label="Lower case the data?", options=("Yes","No"), index=0)
     if case_ans == "Yes":
