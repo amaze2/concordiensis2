@@ -61,18 +61,6 @@ else:
     #d_year_month_text = pickle.load(pickleIn)
     d_year_month_text = pickle.load(open(f.content, "rb"))
     search_terms = [lemmatizer.lemmatize(term.lower()) for term in search_terms if term.isalpha()]
-else:
-    #pickleIn = open("concordy_raw_no_POS.pickle",'rb')
-    f = requests.get("https://drive.google.com/file/d/19mIQf7IGY6haVNIebiVzCiHN5AFR5KFI/view?usp=sharing")
-    #pickleIn = open(f,'rb')
-    #d_year_month_text = pickle.load(pickleIn)
-    d_year_month_text = pickle.load(open(f.content, "rb"))
-    case_ans = st.sidebar.selectbox(label="Lower case the data?", options=("Yes","No"), index=0)
-    if case_ans == "Yes":
-        search_terms = [term.lower() for term in search_terms if term.isalpha()]
-        for year in years:
-            for month in d_year_month_text[year].keys():
-                d_year_month_text[year][month] = [word.lower() for word in d_year_month_text[year][month]]
 
 #Create list of year words
 for year in years:
