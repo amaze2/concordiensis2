@@ -1,5 +1,4 @@
 import nltk, pickle, matplotlib.pyplot as plt, streamlit as st, numpy as np, dropbox
-from io import BytesIO
 nltk.download('punkt')
 nltk.download('wordnet')
 
