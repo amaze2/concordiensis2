@@ -1,4 +1,4 @@
-import nltk, pickle, matplotlib.pyplot as plt, streamlit as st, numpy as np
+import nltk, pickle, matplotlib.pyplot as plt, streamlit as st, numpy as np, dropbox
 nltk.download('punkt')
 nltk.download('wordnet')
 
@@ -36,13 +36,18 @@ years = range(start_year,end_year+1)
 #             for month in d_year_month_text[year].keys():
 #                 d_year_month_text[year][month] = [word.lower() for word in d_year_month_text[year][month]]
 
+dbx = dropbox.Dropbox("sl.AqucdkWMsrbfJkq0WhRa_Dm61vALGoat0sdpFnwbIvKNETnYsdSxvawkQ2JeQ9xsNqbfJbBc5JBvOCepPqyXaejwFe7ulYn8ikH9F0Zlu6Ygadzz1FIKat1IRWUkeyjh294v9Wo")
+f = dbx.files_download("https://www.dropbox.com/s/ov3wvhqpnsn1iy3/concordy_lemma.pickle?dl=0")
+
 lem_ans = st.sidebar.selectbox(label="Lemmatize the data?", options=("Yes","No"), index=0)
 if lem_ans == "Yes":
-    pickleIn = open("concordy_lemma.pickle",'rb')
+    pickleIn = open(f,'rb')
+    #pickleIn = open("concordy_lemma.pickle",'rb')
     d_year_month_text = pickle.load(pickleIn)
     search_terms = [lemmatizer.lemmatize(term.lower()) for term in search_terms if term.isalpha()]
 else:
-    pickleIn = open("concordy_raw_no_POS.pickle",'rb')
+    pickleIn = open(f,'rb')
+    #pickleIn = open("concordy_raw_no_POS.pickle",'rb')
     d_year_month_text = pickle.load(pickleIn)
     case_ans = st.sidebar.selectbox(label="Lower case the data?", options=("Yes","No"), index=0)
     if case_ans == "Yes":
