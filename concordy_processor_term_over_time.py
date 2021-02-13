@@ -16,8 +16,8 @@ search_terms = search_terms.split()
 #set year range / timeline
 # start_year = 1880
 # end_year = 2000
-start_year = st.sidebar.slider(label="Please choose a start year.", min_value=1880, max_value=1999,step=1)
-end_year = st.sidebar.slider(label="Please choose an end year.", min_value=1881, max_value=2000,step=1)
+start_year = st.sidebar.slider(label="Please choose a start year.", min_value=1877, max_value=1999,step=1)
+end_year = st.sidebar.slider(label="Please choose an end year.", min_value=1878, max_value=2000,step=1)
 years = range(start_year,end_year+1)
 
 # lem_ans = input("Lemmatize the data? y/n: ")
@@ -39,11 +39,11 @@ years = range(start_year,end_year+1)
 
 lem_ans = st.sidebar.selectbox(label="Lemmatize the data?", options=("Yes","No"), index=0)
 if lem_ans == "Yes":
-    pickleIn = open("concordy_lemma.pickle",'rb')
+    pickleIn = open("concordy_lemma_schaffer.pickle",'rb')
     d_year_month_text = pickle.load(pickleIn)
     search_terms = [lemmatizer.lemmatize(term.lower()) for term in search_terms if term.isalpha()]
 else:
-    pickleIn = open("concordy_raw_no_POS.pickle",'rb')
+    pickleIn = open("concordy_raw_no_POS_schaffer.pickle",'rb')
     d_year_month_text = pickle.load(pickleIn)
     case_ans = st.sidebar.selectbox(label="Lower case the data?", options=("Yes","No"), index=0)
     if case_ans == "Yes":
@@ -77,7 +77,7 @@ for year in years:
 fig,ax = plt.subplots(figsize = (15, 10))
 for key_term,val_norm_counts_list in dict_search_terms_counts.items():
     ax.plot(years,val_norm_counts_list,label=key_term)
-ax.set_title("Term Frequency in the Concordiensis, 1880-2000")
+ax.set_title("Term Frequency in the Concordiensis, 1877-2000")
 ax.set_xlabel('year')
 ax.set_ylabel('words per million')
 ax.legend()
